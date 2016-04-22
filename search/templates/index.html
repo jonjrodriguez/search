@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block body %}
+
+    <div class="heading m-t-3 m-b-2">
+        <h1 class="display-4 text-xs-center m-b-0">
+            Search
+        </h1>
+    </div>
+
+    <div class="row">
+        <div class="col-md-offset-2 col-md-8">
+            
+            {% if get_flashed_messages() %}
+                <div class="alert alert-danger" role="alert">
+                    {% for message in get_flashed_messages() %}
+                        <p class="flash">{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <form action="{{ url_for('search') }}" method="GET">
+                <div class="input-group">
+                    <input class="form-control" type="text" name="q" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="submit">Search</button>
+                    </span>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

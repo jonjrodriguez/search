@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block nav %}
+
+	<nav class="navbar navbar-full navbar-light bg-faded m-b-2">
+		<div class="container">
+    		<a class="navbar-brand" href="/">Search</a>
+
+    		<form>
+			    <div class="input-group">
+                    <input class="form-control" type="text" name="q" value="{{ query }}" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="submit">Search</button>
+                    </span>
+                </div>
+		  	</form>
+		</div>
+	</nav>
+
+{% endblock %}
+
+{% block body %}
+
+	{% if results %}
+		<p>Results for query <strong>{{ query }}</strong> in directory <strong>docs</strong></p>
+
+		{% for result in results %}
+			<div class="media">
+				<div class="media-body">
+					<h4 class="media-heading">{{ result['title'] }}</h4>
+					<p class="text-muted">{{ result['path'] }}</p>
+				</div>
+			</div>
+		{% endfor %}
+	{% else %}
+		<p>Your search - <strong>{{ query }}</strong> - did not match any documents.</strong></p>
+		<p>Suggestions:</p>
+		<ul>
+			<li>Make sure all words are spelled correctly.</li>
+			<li>Try different keywords.</li>
+			<li>Try more general keywords.</li>
+	{% endif %}
+
+{% endblock %}
