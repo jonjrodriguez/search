@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+	{% if results %}
+		<p>Search results for <strong>{{ query }}</strong></p>
+
+		<div class="row">
+				<div class="col-md-4 col-md-push-8">
+					<div data-spy="affix" data-offset-top="60">
+					{% if request.args.has_key('duplicates') %}
+						<div class="alert alert-info" role="alert">
+							Similar pages are included in the search results. You can repeat the search with the <a href="{{ url_for_search(duplicates=False) }}" class="alert-link">omitted results excluded</a>.
+						</div>
+					{% else %}
+						<div class="alert alert-info" role="alert">
+							Similar pages are excluded from the search results. You can repeat the search with the <a href="{{ url_for_search(duplicates=True) }}" class="alert-link">omitted results included</a>.
+						</div>
+					{% endif %}
+					</div>
+				</div>
+			<div class="col-md-8 col-md-pull-4">
+				{% for result in results %}
+					<div class="card card-block">
+						{% if result['duplicate'] == 'true' %}
+							<span class="label label-info">Similar</span>
+						{% endif %}
+						<h5 class="card-title text-truncate">
+							<a href={{ result['url'] }} target="_blank">{{ result['title'] }}</a>
+						</h5>
+						<p class="text-muted text-truncate">{{ result['url'] }}</p>
+						<p class="card-text">{{ result['highlight'] | safe }}</p>
+					</div>
+				{% endfor %}
+
+				<nav class="center-block">
+					<ul class="pagination">
+						<li class="page-item {% if pages['current'] <= 1 %} disabled {% endif %}">
+							{% if pages['current'] > 1 %}
+								<a class="page-link" href="{{ url_for_search(pages['current'] - 1) }}">&laquo;</a>
+							{% else %}
+								<span class="page-link">&laquo;</span>
+							{% endif %}
+						</li>
+						{% for i in range(pages['start'], pages['end']) %}
+							<li class="page-item {% if pages['current'] == i %} active {% endif %}">
+								<a class="page-link" href="{{ url_for_search(i) }}">{{ i }}</a>
+							</li>
+						{% endfor %}
+						<li class="page-item {% if pages['current'] >= pages['total'] %} disabled {% endif %}">
+							{% if pages['current'] < pages['total'] %}
+								<a class="page-link" href="{{ url_for_search(pages['current'] + 1) }}">&raquo;</a>
+							{% else %}
+								<span class="page-link">&raquo;</span>
+							{% endif %}
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	{% else %}
+		<p>Your search - <strong>{{ query }}</strong> - did not match any documents.</strong></p>
+		<p>Suggestions:</p>
+		<ul>
+			<li>Make sure all words are spelled correctly.</li>
+			<li>Try different keywords.</li>
+			<li>Try more general keywords.</li>
+	{% endif %}
+
+{% endblock %}

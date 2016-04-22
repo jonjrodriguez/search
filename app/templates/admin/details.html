@@ -1,0 +1,31 @@
+{% extends "admin_layout.html" %}
+{% set active_page = "details" %}
+
+{% block admin_body %}
+
+<h3 class="m-b-1 text-truncate">{{ url|urlize(target="_blank") }}</h3>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">Inlinks</div>
+            <ul class="list-group list-group-flush">
+         		{% for inlink in inlinks %}
+                 	<li class="list-group-item text-truncate">{{ inlink['url']|urlize(target="_blank") }}</li>
+         		{% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">Outlinks</div>
+            <ul class="list-group list-group-flush">
+                {% for outlink in outlinks %}
+                    <li class="list-group-item text-truncate">{{ outlink['outlink']|urlize(target="_blank") }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

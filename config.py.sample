@@ -5,6 +5,18 @@ _basedir = os.path.abspath(os.path.dirname(__file__))
 DEBUG=False
 
 SECRET_KEY=''
-DATABASE = os.path.join(_basedir, 'test.db')
+ADMIN_USER = ('username', 'password')
+
+DATABASE = os.path.join(_basedir, 'search.db')
+DOCS_PATH = os.path.join(_basedir, 'app/search/docs')
+INDEX_PATH = os.path.join(_basedir, 'app/search/index')
+
+ALLOWED_DOMAINS = ['example.com']
+START_URLS = ['http://example.com']
+DEPTH_LIMIT = 0
+
+SHINGLE_SIZE = 4
+PERMUTATIONS = 200
+DUPLICATE_THRESHOLD = .8
 
 del os

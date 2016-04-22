@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="card">
+            <h3 class="card-header">Login</h3>
+
+            <div class="card-block">
+                <form method="POST" action="/login">
+                    <!-- E-Mail Address -->
+                    <div class="form-group row">
+                        <label class="text-md-right col-md-3 form-control-label">Username</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" name="username">
+                        </div>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="form-group row">
+                        <label class="text-md-right col-md-3 form-control-label">Password</label>
+                        <div class="col-md-8">
+                            <input type="password" class="form-control" name="password">
+                        </div>
+                    </div>
+
+                    <!-- Login Button -->
+                    <div class="form-group row">
+                        <div class="col-md-8 col-md-offset-3">
+                            <button type="submit" class="btn btn-primary">Login</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

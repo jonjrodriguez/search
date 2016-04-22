@@ -1,0 +1,87 @@
+{% extends "admin_layout.html" %}
+{% set active_page = "users" %}
+
+{% block admin_body %}
+
+	<div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-sm-8">
+                    <h3 class="m-b-0">Users</h3>
+                </div>
+                <div class="col-sm-4">
+                    <button class="btn btn-primary btn-sm pull-xs-right" data-toggle="modal" data-target="#createForm">Create New</button>
+                </div>
+            </div>
+        </div>
+        <table class="table table-hover m-b-0">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Is Admin?</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user['username'] }}</td>
+                    <td>{{ user['is_admin'] }}</td>
+                    <td>
+                        <form method="POST" action="{{ url_for('delete_user') }}">
+                            <input type="hidden" value="{{ user['id'] }}" name="user_id" />
+                            <button class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="modal fade" id="createForm">
+        <div class="modal-dialog" role="document">
+            <form method="POST" action="{{ url_for('users') }}">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title">Create New User</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group row">
+                            <label class="text-md-right col-md-3 form-control-label">Username</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" name="username" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="text-md-right col-md-3 form-control-label">Password</label>
+                            <div class="col-md-8">
+                                <input type="password" class="form-control" name="password" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-offset-3 col-md-8">
+                                <div class="checkbox">
+                                    <label>
+                                        <input name="admin" type="checkbox" value="1">
+                                        Make Admin?
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </form>
+        </div><!-- /.modal-dialog -->
+    </div>
+
+{% endblock %}

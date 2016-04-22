@@ -1,0 +1,68 @@
+Course Project: Search Engine with Near-Duplicate Detection
+
+Languages/Versions Used:
+  Python 2.7.11
+  PyLucene 4.10.1
+
+Dependencies:
+  PyLucene: https://lucene.apache.org/pylucene/index.html
+  Flask: http://flask.pocoo.org/
+  Scrapy: http://scrapy.org/
+  BeautifulSoup4: https://www.crummy.com/software/BeautifulSoup/
+  CityHash: https://github.com/escherba/python-cityhash
+
+Setup:
+  1. Install above dependencies:
+    https://lucene.apache.org/pylucene/install.html
+    pip install flask
+    pip install scrapy
+    pip install beautifulsoup4
+    pip install cityhash
+
+  2. Copy config.py.sample > config.py
+
+  3. Configure required settings:
+    SECRET_KEY: Long random string
+    ADMIN_USER: Username and password that will have admin access
+
+  4. Optionally configure other settings:
+    Path Options:
+      DATABASE: Location to store the sqlite database file
+      DOCS_PATH: Location to store the crawl results
+      INDEX_PATH: Location to store the search index
+
+    Crawler Options:
+      ALLOWED_DOMAINS: List of allowed domains or subdomains to crawl
+      START_URLS: List of starting urls
+      DEPTH_LIMIT: THe number of levels the crawler should go
+
+    Duplicate Options:
+      SHINGLE_SIZE: How large the shingles should be
+      PERMUTATIONS: How many hashes should the minhash algorithm use
+      DUPLICATE_THRESHOLD: Threshold to decide whether documents are duplicates
+
+  5. Quickstart: 
+    python run.py init
+    python run.py crawl
+    python run.py index
+    python run.py serve
+
+    Visit http://127.0.0.1:5000 to search
+    Login to view admin area and duplicates
+
+Usage: 
+  python run.py {init, crawl, index, serve}
+
+  init:
+    Initiates the database and clears any previous data
+
+  crawl:
+    Starts the crawler based on the settings in the config file
+
+  index:
+    Indexes the sites from the latest crawl
+    and finds duplicates according to the config file
+
+  serve:
+    Launches local web server
+    Visit http://127.0.0.1:5000 in browser

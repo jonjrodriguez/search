@@ -1,0 +1,20 @@
+{% extends "admin_layout.html" %}
+{% set active_page = "dashboard" %}
+
+{% block admin_body %}
+
+	<div class="card">
+        <div class="card-header">
+            <h3 class="m-b-0">Latest Crawls</h3>
+        </div>
+        <div class="list-group list-group-flush">
+     		{% for crawl in crawls %}
+             	<div class="list-group-item">
+             		<h6 class="list-group-item-heading">{{ crawl['filepath'] }}</h6>
+					<p class="list-group-item-text text-muted">{{ crawl['crawl_date'] }}</p>
+         		</div>
+     		{% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

@@ -5,3 +5,4 @@
 *.db
 *.egg-info
 config.py
+app/search/index/*

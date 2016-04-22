@@ -1,0 +1,45 @@
+{% extends "admin_layout.html" %}
+{% set active_page = "duplicates" %}
+
+{% block admin_body %} 
+    <ul class="nav nav-tabs m-b-1">
+        <li class="nav-item">
+            <a class="nav-link {% if 'near' == type %} active {% endif%}" href="{{ url_for('duplicates', type='near') }}">Near</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {% if 'exact' == type %} active {% endif%}" href="{{ url_for('duplicates', type='exact') }}">Exact</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {% if 'all' == type %} active {% endif%}" href="{{ url_for('duplicates', type='all') }}">All</a>
+        </li>
+    </ul>
+
+    <div class="table-responsive">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>URL</th>
+                <th>Duplicate</th>
+                <th style="width:10%">Similarity</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for duplicate in duplicates %}
+                <tr>
+                    <td class="text-truncate">
+                        <a href="{{ url_for('details', url=duplicate['url']) }}">
+                            {{ duplicate['url'] }}
+                        </a>
+                    </td>
+                    <td class="text-truncate">
+                        <a href="{{ url_for('details', url=duplicate['duplicate']) }}">
+                            {{ duplicate['duplicate'] }}
+                        </a>
+                    </td>
+                    <td style="width:10%">{{ duplicate['similarity']|round(4) }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+{% endblock %}

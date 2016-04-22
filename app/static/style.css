@@ -1,0 +1,43 @@
+.card-block {
+	padding: .75rem 1.25rem;
+}
+
+h5.card-title {
+	margin-bottom: 0;
+	line-height: 1.2;
+}
+
+.card-block > p.text-muted {
+	margin-bottom: .5rem;
+}
+
+a.alert-link {
+	text-decoration: underline;
+}
+
+.card > .label {
+	position: absolute;
+	top: 0;
+	right: 0;
+	border-radius: 0;
+}
+
+nav.center-block {
+	max-width: 50%;
+}
+
+@media screen and (min-width: 768px) {
+	.affix {
+		width: 25%;
+		position: fixed;
+		top: 20px;
+	}
+}
+
+.table {
+	table-layout: fixed;
+}
+
+th, td {
+	width: 45%;
+}

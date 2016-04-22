@@ -1,0 +1,30 @@
+<nav class="navbar navbar-full navbar-light bg-faded m-b-2">
+	<div class="container">
+		<a class="navbar-brand" href="/">Search</a>
+
+		<form action="/search" class="col-xs-6 col-sm-7">
+		    <div class="input-group">
+                <input class="form-control" type="text" name="q" value="{{ query }}" />
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </span>
+            </div>
+	  	</form>
+
+		<ul class="nav navbar-nav pull-xs-right">
+			{% if g.user %}
+				<li class="nav-item">
+					<a class="nav-link" href="/admin">Admin</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/logout">Logout</a>
+				</li>
+			{% else %}
+				<li class="nav-item">
+					<a class="nav-link" href="/login">Login</a>
+				</li>
+			{% endif %}
+		</ul>
+
+	</div>
+</nav>
